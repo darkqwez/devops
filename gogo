@@ -1,0 +1,149 @@
+git config --global user.name "yourname"
+git config --global user.email "youremail"
+                    --list
+                    user.yourname
+====================================================================
+WSL bhi install---
+
+turn windows features on or off
+
+WSL
+
+if wsl --status gives version 2
+
+wsl --set-default-version 2
+
+In configuration ---- use WSL2 instead of Hyper-V
+
+
+
+
+===========================================================
+
+Jenkins Java
+
+Download Jenkins LTS
+
+
+New Item 
+Select freestyle project
+
+Under build  steps
+Execute windows bash commands
+javac name
+java name
+
+
+Apply and save
+
+Build first time without code
+Add custom workspace
+-Add code
+Build
+
+If java not found error
+
+jenkins
+manage jenkins
+global tool configuration
+JDK
+Specify path -- java jdk ...not the path
+
+
+
+////////////////////////////////
+Pipeline1
+
+Simple script
+
+node {
+stage('Build') {
+echo 'Building...'
+}
+stage('Test') {
+echo 'Testing...'
+}
+stage('Deploy') {
+echo 'Deploying...'
+}
+}
+
+
+OR
+
+
+pipeline {
+    agent any
+    stages {
+        stage('Hello') {
+            steps {
+                echo "Hello Darshil!"
+            }
+        }
+    }
+}
+
+
+OR
+
+WRONG 
+
+ipeline {
+agent any
+stages {
+    stage('Build') {
+        steps {
+        echo 'Hi, GeekFlare. Starting to build the App.'
+        }
+    }
+    stage('Test') {
+        steps {
+            input('Do you want to proceed?')
+        }
+    }
+    stage('Deploy') {
+        parallel {
+            stage('Deploy start ') {
+        steps {
+            echo "Start the deploy.."
+        }
+}
+
+stage('Deploying now') {
+agent {
+docker {
+    reuseNode true
+image 'nginx'
+}
+}
+steps {
+echo "Docker Created"
+
+}
+
+}
+
+}
+}
+stage('Prod') {
+steps {
+echo "App is Prod Ready"
+}
+}
+
+===================================================
+dockerfile
+
+
+FROM nginx:alpine
+COPY . /usr/share/nginx/html/test
+
+
+Commands
+
+docker images
+docker build -t html .
+docker images
+docker run -p 8080:80 -d html
+docker ps
+
